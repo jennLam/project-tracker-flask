@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/student")
 def get_student():
-    """Show information about a student."""
+    """Show information about a student and their project grades."""
 
     github = request.args.get('github')
 
@@ -27,19 +27,21 @@ def get_student():
 
 @app.route("/student-search")
 def get_student_form(): 
-    """Show form for searching for a student """
+    """Show form for searching for a student."""
 
     return render_template("student_search.html")
 
+
 @app.route("/student-create")
 def show_new_student_form(): 
-    """Show form for creating a new student"""
+    """Show form for creating a new student."""
 
     return render_template("student_create.html")
 
+
 @app.route("/student-add", methods=['POST'])
 def student_add(): 
-    """Add a student. """
+    """Add a student."""
 
     firstname = request.form.get("first_name")
     lastname = request.form.get("last_name")
@@ -50,8 +52,12 @@ def student_add():
     return render_template("student_success.html", firstname=firstname,
                             lastname=lastname, github=github)
 
+
+
 @app.route("/project", methods=['GET'])
 def show_project():
+    """Show project information and student grades."""
+
     title = request.args.get('title')
 
     student_grades = hackbright.get_grades_by_title(title)
