@@ -20,27 +20,27 @@ def get_student():
     html = render_template("student_info.html",
                            first=first,
                            last=last,
-                           github=github, 
+                           github=github,
                            projects=projects)
     return html
 
 
 @app.route("/student-search")
-def get_student_form(): 
+def get_student_form():
     """Show form for searching for a student."""
 
     return render_template("student_search.html")
 
 
 @app.route("/student-create")
-def show_new_student_form(): 
+def show_new_student_form():
     """Show form for creating a new student."""
 
     return render_template("student_create.html")
 
 
 @app.route("/student-add", methods=['POST'])
-def student_add(): 
+def student_add():
     """Add a student."""
 
     firstname = request.form.get("first_name")
@@ -50,7 +50,7 @@ def student_add():
     hackbright.make_new_student(firstname, lastname, github)
 
     return render_template("student_success.html", firstname=firstname,
-                            lastname=lastname, github=github)
+                           lastname=lastname, github=github)
 
 
 
@@ -65,8 +65,8 @@ def show_project():
     project_title, desc, max_grade = hackbright.get_project_by_title(title)
 
     return render_template("project_info.html", project_title=project_title,
-                            desc=desc, max_grade=max_grade, 
-                            student_grades=student_grades)
+                           desc=desc, max_grade=max_grade,
+                           student_grades=student_grades)
 
 
 if __name__ == "__main__":
